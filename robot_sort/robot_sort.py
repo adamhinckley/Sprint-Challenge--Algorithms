@@ -100,35 +100,35 @@ class SortingRobot:
 
     def sort(self):
         """
-        Sort the robot's list.
+        robot starts at index zero
+        checks to see if the first item is larger than the second item
+        if the first item is larger swap then move to the next item
+        Turn light on if an item is swapped
+        continue to end of array then turn the light off
+        now go from the back of the array to the front
+        swap items as needed
+        turn light if if an item is swapped
+        if the robot makes it though the array without the light turing on, the array is sorted
         """
-
-    """
-    robot starts at index zero
-    checks to see if the first item is larger than the second item
-    if the first item is larger swap then move to the next item
-    Turn light on if an item is swapped
-    continue to end of array then turn the light off
-    now go from the back of the array to the front
-    swap items as needed
-    turn light if if an item is swapped
-    if the robot makes it though the array without the light turing on, the array is sorted.
-
-    """
-
-       while self.can_move_right():
-            if self.compare_item() == -1:
-                self.swap_item()
-                self.set_light_on()
-            else:
-                self.move_right()
-            if !self.can_move_right():
-                self.set_light_off
-        if self.can_move_left():
-            if self.compare_item() == 1:
-                self.swap_item()
-            else:
-                self.move_left()
+        # uses the default light condition to start the loop
+        while self.light_is_on() == False:
+            self.set_light_on()
+        # starts moving right across the array and swapping items if the held item is greater
+            while self.can_move_right():
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    self.move_left()
+                    self.swap_item()
+                    self.move_right()
+                    self.set_light_off()
+                else:
+                    self.move_left()
+                    self.swap_item()
+                    self.move_right()
+            # if light is off go back to the beginning
+            if self.light_is_on() == False:
+                while self.can_move_left():
+                    self.move_left()
 
 
 if __name__ == "__main__":
